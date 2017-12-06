@@ -4,16 +4,24 @@ var login = document.getElementById('login');
 var signup = document.getElementById('signup');
 var loginEmail = document.getElementById('login_email');
 var email = document.getElementById('email');
+var loginPassword = document.getElementById('login_password');
 var pw1 = document.getElementById('password');
 var pw2 = document.getElementById('confirmPassword');
 var errorMsg = document.getElementById('errorMessage');
 var loginErrorMsg = document.getElementById('loginErrorMessage');
 
+// sort out passwords IMPORTANT
+function parseResponse() {
+
+};
+
 login.addEventListener('submit', function (event) {
     event.preventDefault();
     if (errorMsg.textContent === "") {
         console.log('submitted');
-        // send a post to login
+        XHRRequest('/login', 'POST', { email: loginEmail.textContent, password: loginPassword.textContent }, parseResponse)
+        console.log(loginEmail.textContent, loginPassword.textContent)
+        //check this
     }
 });
 
@@ -21,11 +29,13 @@ signup.addEventListener('submit', function (event) {
     event.preventDefault();
     if (errorMsg.textContent === "" && pw1.className === "") {
         console.log('submitted');
-         // send a post to signup
+        XHRRequest('/signup', 'POST', { email: email.textContent, password: pw1.textContent }, parseResponse)
+        console.log(email.textContent, pw1.textContent)
+        //check this
     }
 });
 
-var validEmail = function(email) {
+var validEmail = function (email) {
     var regex = /^[\w-.]+@[\w-.]+.\w+$/;
     return regex.test(email);
 }
@@ -48,16 +58,16 @@ var resetEmail = function (errMessage, emailBox) {
     errMessage.textContent = "";
 }
 
-loginEmail.addEventListener('focusout', function() {
+loginEmail.addEventListener('focusout', function () {
     checkEmail(loginErrorMsg, loginEmail)
 });
-email.addEventListener('focusout', function() {
+email.addEventListener('focusout', function () {
     checkEmail(errorMsg, email)
 });
-loginEmail.addEventListener('focus', function() {
+loginEmail.addEventListener('focus', function () {
     resetEmail(loginErrorMsg, loginEmail)
 });
-email.addEventListener('focus', function() {
+email.addEventListener('focus', function () {
     resetEmail(errorMsg, email)
 });
 
@@ -91,3 +101,15 @@ var resetPasswords = function (event) {
 
 pw1.addEventListener('focus', resetPasswords);
 pw2.addEventListener('focus', resetPasswords);
+
+var XHRRequest = function (url, method, body, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var result = JSON.parse(xhr.responseText)
+            callback(result);
+        }
+    }
+    xhr.open(method, url, true)
+    xhr.send(body)
+}
