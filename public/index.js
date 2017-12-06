@@ -3,20 +3,22 @@ var signup = document.getElementById('signup');
 var loginEmail = document.getElementById('login_email');
 var email = document.getElementById('email');
 var loginPassword = document.getElementById('login_password');
-var username = document.getElementById('username');
 var pw1 = document.getElementById('password');
 var pw2 = document.getElementById('confirmPassword');
 var errorMsg = document.getElementById('errorMessage');
 var loginErrorMsg = document.getElementById('loginErrorMessage');
 
 // sort out passwords IMPORTANT
+function parseResponse() {
+
+};
 
 login.addEventListener('submit', function (event) {
     event.preventDefault();
     if (errorMsg.textContent === "") {
         console.log('submitted');
-        XHRRequest('/login', 'POST', { username: username.textContent, password: loginPassword.textContent })
-        console.log(username.textContent, password.textContent)
+        XHRRequest('/login', 'POST', { email: loginEmail.textContent, password: loginPassword.textContent }, parseResponse)
+        console.log(loginEmail.textContent, loginPassword.textContent)
         //check this
     }
 });
@@ -25,8 +27,8 @@ signup.addEventListener('submit', function (event) {
     event.preventDefault();
     if (errorMsg.textContent === "" && pw1.className === "") {
         console.log('submitted');
-        XHRRequest('/signup', 'POST', { username: username.textContent, email: email.textContent, password: pw1.textContent })
-        console.log(username.textContent, email.textContent, pw1.textContent)
+        XHRRequest('/signup', 'POST', { email: email.textContent, password: pw1.textContent }, parseResponse)
+        console.log(email.textContent, pw1.textContent)
         //check this
     }
 });
