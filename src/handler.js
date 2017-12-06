@@ -1,10 +1,12 @@
+/*eslint-disable*/
+
 const fs = require('fs');
 const path = require('path');
 const querystring = require('querystring');
 
 
 const homeHandler = (request, response) => {
-  const filePath = path.join(__dirname, '..', 'public', 'index.html')
+  const filePath = path.join(__dirname, '..', 'public', 'login.html')
   fs.readFile(filePath, function(err, file) {
     if (err) {
       response.writeHead(500, {
@@ -46,6 +48,20 @@ const staticFileHandler = (request, response, endpoint) => {
   })
 }
 
+const signUpUser = (request, response) => {
+  let allData = '';
+  request.on('data', function(data) {
+    allData += data;
+  });
+  request.on('end', function() {
+    console.log(allData);
+  })
+  //receive data in chunks
+  //parse data
+  //check if user in database
+      //if yes send message 'Already signed up'
+      //if no add to database and log in
+}
 
 
 module.exports = {

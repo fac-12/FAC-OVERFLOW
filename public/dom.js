@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 var login = document.getElementById('login');
 var signup = document.getElementById('signup');
 var loginEmail = document.getElementById('login_email');
