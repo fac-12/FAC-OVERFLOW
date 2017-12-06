@@ -8,9 +8,8 @@
 	height: 115px;
     background-color: #20c3bc;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-	padding: 25px;
+	align-items: center;
+	justify-content: space-between;
 }
 
 nav li {
@@ -23,9 +22,15 @@ nav li {
 	text-transform: uppercase;
 	font-weight: 200;
 	letter-spacing: 3px;
-	margin-left: 10px;
+	margin-left: 20px;
 }
 
 .user {
-    align-self: flex-end;
+	align-self: flex-end;
+	color: white;
+	margin-right: 20px;
+}
+
+p {
+	font-weight: 100;
 }
