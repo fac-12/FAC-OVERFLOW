@@ -18,20 +18,14 @@ function parseResponse() {
 login.addEventListener('submit', function (event) {
     event.preventDefault();
     if (errorMsg.textContent === "") {
-        console.log('submitted');
-        XHRRequest('/login', 'POST', { email: loginEmail.textContent, password: loginPassword.textContent }, parseResponse)
-        console.log(loginEmail.textContent, loginPassword.textContent)
-        //check this
+        XHRRequest('/login', 'POST', JSON.stringify({email: loginEmail.value, password: loginPassword.value}), parseResponse)
     }
 });
 
 signup.addEventListener('submit', function (event) {
     event.preventDefault();
     if (errorMsg.textContent === "" && pw1.className === "") {
-        console.log('submitted');
-        XHRRequest('/signup', 'POST', { email: email.textContent, password: pw1.textContent }, parseResponse)
-        console.log(email.textContent, pw1.textContent)
-        //check this
+        XHRRequest('/signup', 'POST', JSON.stringify({ email: email.value, password: pw1.value }), parseResponse)
     }
 });
 
@@ -110,6 +104,7 @@ var XHRRequest = function (url, method, body, callback) {
             callback(result);
         }
     }
-    xhr.open(method, url, true)
-    xhr.send(body)
+    xhr.open(method, url, true);
+    console.log(body);
+    xhr.send(body);
 }
