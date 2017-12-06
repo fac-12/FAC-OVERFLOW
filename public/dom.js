@@ -32,7 +32,7 @@ var checkEmail = function (errMessage, emailBox) {
     console.log(errMessage)
     if (emailBox.value === "") {
         errMessage.textContent = "Please enter an email."
-    } else if (!validEmail(email.value)) {
+    } else if (!validEmail(emailBox.value)) {
         errMessage.textContent = "Invalid email address."
         emailBox.className = "red";
     } else {
