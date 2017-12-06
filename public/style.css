@@ -1,8 +1,7 @@
 * {
-	font-family: 'Ubuntu', serif;
 	margin: 0;
 	box-sizing: border-box;
-	background-color: rgb(227, 227, 227);
+	font-family: 'Oxygen', sans-serif;
 }
 
 section {
@@ -11,7 +10,7 @@ section {
     justify-content: center;
     margin: 0 auto;
     width: 20rem;
-    background: white;
+    background:white;
 }
 
 h1 {
@@ -67,3 +66,26 @@ p {
 	border: 1px solid red;
 	outline-color: red;
 }
+
+/* forum */
+
+.navbar {
+	height: 100px;
+	background-color: #20c3bc;
+	padding: 25px;
+}
+
+nav li {
+	list-style: none;
+}
+
+.logo {
+	color: white;
+	font-size: 2rem;
+	text-transform: uppercase;
+	font-family: 'Oxygen', sans-serif;
+	font-weight: 200;
+	letter-spacing: 3px;
+	margin-left: 10px;
+}
+
