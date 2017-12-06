@@ -11,21 +11,21 @@ var errorMsg = document.getElementById('errorMessage');
 var loginErrorMsg = document.getElementById('loginErrorMessage');
 
 // sort out passwords IMPORTANT
-function parseResponse() {
+function handleResponse() {
 
 };
 
 login.addEventListener('submit', function (event) {
     event.preventDefault();
     if (errorMsg.textContent === "") {
-        XHRRequest('/login', 'POST', JSON.stringify({email: loginEmail.value, password: loginPassword.value}), parseResponse)
+        XHRRequest('/login', 'POST', JSON.stringify({email: loginEmail.value, password: loginPassword.value}), handleResponse)
     }
 });
 
 signup.addEventListener('submit', function (event) {
     event.preventDefault();
     if (errorMsg.textContent === "" && pw1.className === "") {
-        XHRRequest('/signup', 'POST', JSON.stringify({ email: email.value, password: pw1.value }), parseResponse)
+        XHRRequest('/signup', 'POST', JSON.stringify({ email: email.value, password: pw1.value }), handleResponse)
     }
 });
 
@@ -35,7 +35,6 @@ var validEmail = function (email) {
 }
 
 var checkEmail = function (errMessage, emailBox) {
-    console.log(errMessage)
     if (emailBox.value === "") {
         errMessage.textContent = "Please enter an email."
     } else if (!validEmail(emailBox.value)) {
@@ -100,11 +99,24 @@ var XHRRequest = function (url, method, body, callback) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            var result = JSON.parse(xhr.responseText)
+            var result = parseResponse(xhr.responseText);
             callback(result);
+        } else if (xhr.readyState === 4 && xhr.status === 201) {
+            window.location.href = xhr.getResponseHeader('Location');
+        } else if (xhr.readyState === 4 && xhr.status >= 400) {
+            console.log(xhr.responseText);
         }
     }
     xhr.open(method, url, true);
-    console.log(body);
     xhr.send(body);
+}
+
+function parseResponse(response) {
+    try {
+        return JSON.parse(response);
+    } catch (e) {
+        return {
+            err: "Not JSON"
+        };
+    }
 }
