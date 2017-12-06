@@ -9,6 +9,8 @@ var errorMsg = document.getElementById('errorMessage');
 var loginErrorMsg = document.getElementById('loginErrorMessage');
 
 // sort out passwords IMPORTANT
+//password regex
+//finish parseResponse function
 function parseResponse() {
 
 };
