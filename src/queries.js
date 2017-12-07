@@ -27,4 +27,11 @@ const getHash = (email, cb) => {
 	})
 }
 
-module.exports = {emailInDatabase,addUser, getHash};
+const loadPost = (cb) => {
+	dbConnection.query('SELECT * FROM post WHERE id=1', (err, res) => {
+		if (err) cb(err);
+		else cb(null, res);
+	})
+}
+
+module.exports = {emailInDatabase,addUser, getHash, loadPost};
