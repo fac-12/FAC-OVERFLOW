@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "tape test/db_test.js | tap-spec",
-    "nodemon": "nodemon ./src/server.js"
+    "nodemon": "nodemon ./src/server.js",
+    "start": "node ./src/server.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,9 @@
     "nodemon": "^1.12.5",
     "tap-spec": "^4.1.1",
     "tape": "^4.8.0"
+  },
+  "engines": {
+    "node": "9.2.0"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
