@@ -66,14 +66,16 @@ const validateToken = (request, response) => {
   }
   if (!request.headers.cookie) return send401();
   const { jwt } = parse(request.headers.cookie);
-  if(!jwt) return send401();
+  if (!jwt) return send401();
   return verify(jwt, process.env.SECRET, (jwt_err, jwt_res) => {
     if (jwt_err) {
       return send401()
     } else {
-       const email = jwt_res;
-       response.writeHead(200, { 'Content-Type': 'text/plain'});
-       return response.end(email);
+      const email = jwt_res;
+      response.writeHead(200, {
+        'Content-Type': 'text/plain'
+      });
+      return response.end(email);
     }
   })
 }
@@ -91,7 +93,7 @@ const signUpUser = (request, response) => {
         response.writeHead(409, {
           'Content-Type': 'text/plain'
         });
-        return response.end('User already in database');
+        return response.end('You\'ve already signed up!');
       } else if (res === 0) {
         const hashPassword = (password, callback) => {
           bcrypt.hash(password, 10, (bcrypt_err, bcrypt_res) => {
@@ -141,10 +143,10 @@ const loginUser = (request, response) => {
     const password = userInfo.password;
     queries.emailInDatabase(email, (err, res) => {
       if (res === 0) {
-        response.writeHead(409, {
+        response.writeHead(403, {
           "Content-Type": "text/plain"
         })
-        return response.end('Email not in database');
+        return response.end('You need to sign up first!');
       } else if (res === 1) {
         queries.getHash(email, (hash_err, hash_res) => {
           if (hash_err) {
@@ -168,18 +170,18 @@ const loginUser = (request, response) => {
                   });
                   return response.end();
                 } else {
-                  response.writeHead(201, {
-                    "Location": '/login'
+                  response.writeHead(403, {
+                    "Content-Type": 'text/plain'
                   });
-                  return response.end('Password was incorrect');
+                  return response.end('Password is incorrect');
                 }
               }
             });
           }
-        })
+        });
       }
-    })
-  })
+    });
+  });
 }
 
 module.exports = {
