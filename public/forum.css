@@ -34,3 +34,7 @@ nav li {
 p {
 	font-weight: 100;
 }
+
+.hidden {
+	display:none;
+}

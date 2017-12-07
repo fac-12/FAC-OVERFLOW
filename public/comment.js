@@ -9,6 +9,8 @@ var getRequest = function(url, cb) {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200){
             cb(xhr.responseText);
+        } else if (xhr.readyState === 4 && xhr.status === 401){
+            window.location.href = '/';
         }
     }
     xhr.open('GET', url, true);
@@ -16,6 +18,7 @@ var getRequest = function(url, cb) {
 }
 
 var updateEmail = function(email) {
+    document.getElementsByTagName('body')[0].className = "";
     userDisplay.textContent = email;
 }
 
