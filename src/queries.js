@@ -40,4 +40,4 @@ const loadComments = (postID, cb) => {
 	})
 }
 
-module.exports = {emailInDatabase,addUser, getHash, loadPost};
+module.exports = {emailInDatabase,addUser, getHash, loadPost, loadComments};

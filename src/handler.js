@@ -204,6 +204,7 @@ const getComments =  (request, response, endpoint) => {
       return response.end('Database error')
     } else {
       response.writeHead(200,{ 'Content-Type': 'application/json'})
+      console.log(comments_res);
       response.end(JSON.stringify(comments_res))
     }
   })
@@ -215,5 +216,6 @@ module.exports = {
   signUpUser,
   loginUser,
   validateToken,
-  getPost
+  getPost,
+  getComments
 };
