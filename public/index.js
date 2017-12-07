@@ -15,7 +15,13 @@ var loginErrorMsg = document.getElementById('loginErrorMessage');
 
 login.addEventListener('submit', function (event) {
     event.preventDefault();
-    if (errorMsg.textContent === "") {
+    if (emailBox.value === "") {
+        loginErrorMsg.textContent = "Please enter an email."
+    } else {
+        loginErrorMsg.textContent = checkPassword(loginPassword.value);    
+    
+    }
+    if (loginErrorMsg.textContent === "") {
         XHRRequest('/login', 'POST', JSON.stringify({email: loginEmail.value, password: loginPassword.value}), loginErrorMsg)
     }
 });
@@ -33,10 +39,10 @@ var validEmail = function (email) {
 }
 
 var checkEmail = function (errMessage, emailBox) {
-    if (emailBox.value === "") {
-        errMessage.textContent = "Please enter an email."
-    } else if (!validEmail(emailBox.value)) {
+    if (emailBox.value && (!validEmail(emailBox.value))) {
+        console.log(errMessage.textContent);
         errMessage.textContent = "Invalid email address."
+        console.log(errMessage.textContent);
         emailBox.className = "red";
     } else {
         emailBox.className = "";
@@ -45,6 +51,7 @@ var checkEmail = function (errMessage, emailBox) {
 }
 
 var resetEmail = function (errMessage, emailBox) {
+    console.log('reset');
     emailBox.className = "";
     errMessage.textContent = "";
 }
