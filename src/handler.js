@@ -166,7 +166,7 @@ const loginUser = (request, response) => {
                   const cookie = sign(email, process.env.SECRET);
                   response.writeHead(201, {
                     "Location": '/forum',
-                    'Set-Cookie': `jwt=${cookie}; HttpOnly`
+                    'Set-Cookie': `jwt=${cookie}; Max-Age=80000; HttpOnly`
                   });
                   return response.end();
                 } else {
@@ -210,6 +210,15 @@ const getComments =  (request, response, endpoint) => {
   })
 }
 
+const logoutHandler =  (request, response) => {
+  response.writeHead(201, {
+    'Location': '/',
+    'Set-Cookie': `jwt=no; Max-Age=0; HttpOnly;`
+  });
+  return response.end();
+}
+
+
 module.exports = {
   homeHandler,
   staticFileHandler,
@@ -217,5 +226,6 @@ module.exports = {
   loginUser,
   validateToken,
   getPost,
-  getComments
+  getComments,
+  logoutHandler
 };
