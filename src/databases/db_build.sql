@@ -36,6 +36,9 @@ INSERT INTO post(postUser_id, title, text_post) VALUES
     (4, 'Authentication','I like cookies');
 
 INSERT INTO comments(post_id, commentuser_id, text_comments) VALUES
-    (1, 2, 'I will HTML too!');
+    (1, 1, 'I love HTML! Hello World!'),
+    (1, 2, 'Hmmm I find HTML difficult :('),
+    (1, 1, 'It gets easier with practice!'),
+    (1, 2, 'Thanks! Will get there...');
 
 COMMIT;

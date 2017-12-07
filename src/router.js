@@ -16,6 +16,8 @@ const router = (request, response) => {
     handlers.validateToken(request, response);
   } else if (endpoint === '/loadpost') {
       handlers.getPost(request, response);
+  } else if (endpoint.indexOf('/loadcomments') !== -1) {
+    handlers.getComments(request, response, endpoint)
   } else {
     response.writeHead(404, {'Content-Type': 'text/plain'});
     response.end('404 resource not found');
