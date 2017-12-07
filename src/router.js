@@ -8,6 +8,8 @@ const router = (request, response) => {
     handlers.staticFileHandler(request, response, endpoint);
   } else if (endpoint === '/signup') {
     handlers.signUpUser(request, response);
+  } else if (endpoint === '/login') {
+    handlers.loginUser(request, response);
   } else if (endpoint === '/forum') {
     handlers.staticFileHandler(request, response, '/public/Forum.html');
   } else {

@@ -1,3 +1,4 @@
+
 /*eslint-disable*/
 
 const fs = require('fs');
@@ -98,16 +99,61 @@ const signUpUser = (request, response) => {
             });
           }
         });
-        
+
       }
     });
- 
+
   });
 }
 
+const loginUser = (request, response) => {
+  let data = '';
+  request.on('data', function(chunk) {
+    data += chunk;
+  })
+  request.on('end', function() {
+    const userInfo = JSON.parse(data);
+    const email = userInfo.email;
+    const password = userInfo.password;
+    queries.emailInDatabase(email, (err,res) => {
+      if (res === 0) {
+        response.writeHead(409, {"Content-Type" : "text/plain"})
+        return response.end('Email not in database');
+      }
+      else if (res === 1) {
+       queries.getHash(email, (hash_err, hash_res) => {
+            if (hash_err) {
+              response.writeHead(500, {"Content-Type" : "text/plain"})
+             return response.end('server error password not found');
+            }
+            else {
+              bcrypt.compare(password, hash_res.rows[0].password, (bcrypt_err, bcrypt_res) => {
+                if (bcrypt_err) {
+                  console.log(bcrypt_err);
+                  response.writeHead(500, {"Content-Type" : "text/plain"})
+                 return response.end('server error');
+                }
+                else {
+                  if (bcrypt_res) {
+                    const cookie = sign(email, process.env.SECRET);
+                    response.writeHead(201, {"Location" : '/forum', 'Set-Cookie' : `jwt=${cookie}; HttpOnly`});
+                    return response.end();
+                  } else {
+                    response.writeHead(201, {"Location" : '/login'});
+                    return response.end('Password was incorrect');
+                  }
+                }
+              });
+            }
+        })
+      }
+    })
+  })
+}
 
 module.exports = {
   homeHandler,
   staticFileHandler,
-  signUpUser
+  signUpUser,
+  loginUser
 };
