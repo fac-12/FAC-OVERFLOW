@@ -34,7 +34,7 @@ const loadPost = (cb) => {
 }
 
 const loadComments = (postID, cb) => {
-	dbConnection.query(`SELECT users.username, comments.text_comments FROM users, comments WHERE users.id=comments.commentuser_id AND comments.post_id=${postID}`, (err, res) => {
+	dbConnection.query(`SELECT users.username, comments.text_comments FROM users, comments WHERE users.id=comments.commentuser_id AND comments.post_id=${postID} ORDER BY comments.id`, (err, res) => {
 		if (err) cb(err);
 		else cb(null, res.rows);
 	})
