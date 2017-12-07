@@ -29,7 +29,7 @@ const getHash = (email, cb) => {
 const loadPost = (cb) => {
 	dbConnection.query('SELECT post.id, post.title, post.text_post, users.username FROM post, users WHERE users.id=post.postuser_id', (err, res) => {
 		if (err) cb(err);
-		else cb(null, res);
+		else cb(null, res.rows);
 	})
 }
 
@@ -40,4 +40,4 @@ const loadComments = (postID, cb) => {
 	})
 }
 
-module.exports = {emailInDatabase,addUser, getHash, loadPost};
+module.exports = {emailInDatabase,addUser, getHash, loadPost, loadComments};
