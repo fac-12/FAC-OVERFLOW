@@ -184,10 +184,23 @@ const loginUser = (request, response) => {
   });
 }
 
+const getPost =  (request, response) => {
+  queries.loadPost((post_err, post_res) => {
+    if(post_err) {
+      response.writeHead(500, {'Content-Type': 'text/plain'})
+      return response.end('Database error')
+    } else {
+      response.writeHead(200,{ 'Content-Type': 'application/json'})
+      response.end(JSON.stringify(post_res.rows[0]))
+    }
+  })
+}
+
 module.exports = {
   homeHandler,
   staticFileHandler,
   signUpUser,
   loginUser,
-  validateToken
+  validateToken,
+  getPost
 };
