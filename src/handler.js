@@ -33,7 +33,7 @@ const staticFileHandler = (request, response, endpoint) => {
     ico: 'image/x-icon',
   }
   const extension = endpoint.split('.')[1].split('?')[0];
-  const filePath = path.join(__dirname, '..', endpoint)
+  const filePath = path.join(__dirname, '..', endpoint);
   fs.readFile(filePath, function(err, file) {
     if (err && err.code === 'ENOENT') {
       response.writeHead(404, {
@@ -65,7 +65,7 @@ const signUpUser = (request, response) => {
         response.writeHead(409, {
           'Content-Type': 'text/plain'
         });
-        response.end('User already in database');
+        return response.end('User already in database');
       } else if (res === 0) {
         const hashPassword = (password, callback) => {
           bcrypt.hash(password, 10, (bcrypt_err, bcrypt_res) => {
@@ -73,12 +73,12 @@ const signUpUser = (request, response) => {
              else callback(null,bcrypt_res);
           });
         };
-        const hashedPassword = hashPassword(userInfo.password,(hash_err,hash_res) => {
+        hashPassword(userInfo.password,(hash_err,hash_res) => {
           if(hash_err) {
             response.writeHead(500, {
               'Content-Type': 'text/plain'
             });
-            response.end('Password Error');
+            return response.end('Password Error');
           }
           else{
             queries.addUser(email,hash_res, (add_err, add_res) => {
@@ -86,11 +86,11 @@ const signUpUser = (request, response) => {
                 response.writeHead(500, {
                   'Content-Type': 'text/plain'
                 });
-                response.end('Database Error');
+                return response.end('Database Error');
               }
               else {
                 const cookie = sign(email, process.env.SECRET);
-                response.writeHead(302, {
+                response.writeHead(201, {
                   'Location' : '/forum',
                   'Set-Cookie' : `jwt=${cookie}; HttpOnly`
                 });
@@ -104,11 +104,6 @@ const signUpUser = (request, response) => {
     });
 
   });
-  //parse data
-
-  //check if user in database
-      //if yes send message 'Already signed up'
-      //if no add to database and log in
 }
 
 const loginUser = (request, response) => {
