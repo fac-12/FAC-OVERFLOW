@@ -1,11 +1,12 @@
 * {
-    font-family: 'Oxygen', sans-serif;
+	/* font-family: 'Oxygen', sans-serif; */
+	font-family: 'Source Sans Pro', sans-serif;
     margin: 0;
 	box-sizing: border-box;
 }
 
 .navbar {
-	height: 115px;
+	height: 100px;
     background-color: #20c3bc;
     display: flex;
 	align-items: center;
@@ -18,11 +19,17 @@ nav li {
 
 .logo {
 	color: white;
-	font-size: 2rem;
-	text-transform: uppercase;
-	font-weight: 200;
-	letter-spacing: 3px;
+	font-size: 1.5rem;
+	text-transform: lowercase;
+	font-weight: lighter;
+	font-weight: lighter;
+	/* letter-spacing: 3px; */
 	margin-left: 20px;
+}
+
+.logo span {
+	font-weight: 400;
+
 }
 
 .user {
