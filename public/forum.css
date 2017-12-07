@@ -41,9 +41,6 @@ nav li {
 p {
 	font-weight: 100;
 }
-/* .post {
-	margin-left: 100px;
-} */
 
 .postTitle {
 	font-size: 1.4rem;
@@ -85,3 +82,6 @@ main {
 	border-bottom: 1px solid #ecf0f1;
 }
 
+.hidden {
+	display:none;
+}
