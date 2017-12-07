@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "tape",
+    "test": "tape test/db_test.js | tap-spec",
     "nodemon": "nodemon ./src/server.js"
   },
   "repository": {
