@@ -17,8 +17,10 @@ const router = (request, response) => {
   } else if (endpoint === '/loadpost') {
       handlers.getPost(request, response);
   } else if (endpoint.indexOf('/loadcomments') !== -1) {
-    handlers.getComments(request, response, endpoint)
-  } else {
+    handlers.getComments(request, response, endpoint);
+  } else if (endpoint.indexOf('/logout') !== -1) {
+    handlers.logoutHandler(request, response);
+  }else {
     response.writeHead(404, {'Content-Type': 'text/plain'});
     response.end('404 resource not found');
   }
