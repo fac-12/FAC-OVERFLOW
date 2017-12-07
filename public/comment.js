@@ -2,6 +2,7 @@
 
 var userDisplay = document.getElementsByClassName('user')[0];
 var postDisplay = document.getElementById('posts');
+var logoutBtn = document.getElementById('logoutBtn');
 
 var getRequest = function(url, cb) {
     var xhr = new XMLHttpRequest();
@@ -83,6 +84,16 @@ function displayComments(button, comments, post) {
     post.appendChild(commentsHolder);
 }
 
-getRequest('/loadpost', updatePosts)
+getRequest('/loadpost', updatePosts);
 
+logoutBtn.addEventListener('click',function(){
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 201){
+          window.location.href = xhr.getResponseHeader('Location');
+      }
+  }
+  xhr.open('GET', '/logout', true);
+  xhr.send();
 
+})
