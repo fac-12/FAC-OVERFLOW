@@ -15,11 +15,8 @@ var loginErrorMsg = document.getElementById('loginErrorMessage');
 
 login.addEventListener('submit', function (event) {
     event.preventDefault();
-    if (emailBox.value === "") {
+    if (loginEmail.value === "") {
         loginErrorMsg.textContent = "Please enter an email."
-    } else {
-        loginErrorMsg.textContent = checkPassword(loginPassword.value);    
-    
     }
     if (loginErrorMsg.textContent === "") {
         XHRRequest('/login', 'POST', JSON.stringify({email: loginEmail.value, password: loginPassword.value}), loginErrorMsg)
@@ -28,10 +25,19 @@ login.addEventListener('submit', function (event) {
 
 signup.addEventListener('submit', function (event) {
     event.preventDefault();
+    if (email.value === "") {
+        loginErrorMsg.textContent = "Please enter an email."
+    } else {
+        loginErrorMsg.textContent = badPassword(loginPassword.value);
+    }
     if (errorMsg.textContent === "" && pw1.className === "") {
         XHRRequest('/signup', 'POST', JSON.stringify({ email: email.value, password: pw1.value }), errorMsg)
     }
 });
+
+loginPassword.addEventListener('focus', function (){
+    loginErrorMsg.textContent = '';
+})
 
 var validEmail = function (email) {
     var regex = /^[\w-.]+@[\w-.]+.\w+$/;
@@ -50,12 +56,18 @@ var checkEmail = function (errMessage, emailBox) {
     }
 }
 
-var resetEmail = function (errMessage, emailBox) {
-    console.log('reset');
-    emailBox.className = "";
-    errMessage.textContent = "";
-}
 
+var badPassword = function(password){
+    var regex = /^(?=.*?[a-z])(?=.*?[0-9]).{8,}$/;
+    var minEight = /^.{8,}$/;
+    if(regex.test(password)){
+        return '';
+    } else if (minEight.test(password)){
+        return 'Must include numbers and characters';
+    } else {
+        return 'Password not long enough (8+)';
+    }
+}
 loginEmail.addEventListener('focusout', function () {
     checkEmail(loginErrorMsg, loginEmail)
 });
@@ -63,14 +75,17 @@ email.addEventListener('focusout', function () {
     checkEmail(errorMsg, email)
 });
 loginEmail.addEventListener('focus', function () {
-    resetEmail(loginErrorMsg, loginEmail)
+    loginEmail.className = "";
 });
 email.addEventListener('focus', function () {
-    resetEmail(errorMsg, email)
+    email.className = "";
+    if (pw1.className !== 'red'){
+        errMessage.textContent = "";
+    }
 });
 
 var checkPasswords = function (event) {
-    if (pw1.value !== pw2.value) {
+    if ((pw1.value !== pw2.value) && pw2.value && pw1.value) {
         errorMsg.textContent = "Passwords do not match";
         pw1.className = "red";
         pw2.className = "red";
