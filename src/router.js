@@ -9,6 +9,8 @@ const router = (request, response) => {
     handlers.staticFileHandler(request, response, endpoint);
   } else if (endpoint === '/signup') {
     handlers.signUpUser(request, response);
+  } else if (endpoint === '/login') {
+    handlers.loginUser(request, response);
   }
   else {
     response.writeHead(404, {'Content-Type': 'text/plain'});
