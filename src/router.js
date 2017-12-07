@@ -11,6 +11,7 @@ const router = (request, response) => {
   } else if (endpoint === '/login') {
     handlers.loginUser(request, response);
   } else if (endpoint === '/forum') {
+    handlers.validateToken(request, response);
     handlers.staticFileHandler(request, response, '/public/Forum.html');
   } else {
     response.writeHead(404, {'Content-Type': 'text/plain'});

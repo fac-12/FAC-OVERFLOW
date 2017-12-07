@@ -1,4 +1,3 @@
-
 /*eslint-disable*/
 
 const fs = require('fs');
@@ -6,12 +5,17 @@ const path = require('path');
 const querystring = require('querystring');
 const queries = require('./queries.js');
 const bcrypt = require('bcryptjs');
-const {sign, verify} = require('jsonwebtoken');
-const {parse} = require('cookie');
+const {
+  sign,
+  verify
+} = require('jsonwebtoken');
+const {
+  parse
+} = require('cookie');
 
 const homeHandler = (request, response) => {
   const filePath = path.join(__dirname, '..', 'public', 'login.html')
-  fs.readFile(filePath, function(err, file) {
+  fs.readFile(filePath, function (err, file) {
     if (err) {
       response.writeHead(500, {
         'Content-Type': 'text/plain'
@@ -34,7 +38,7 @@ const staticFileHandler = (request, response, endpoint) => {
   }
   const extension = endpoint.split('.')[1].split('?')[0];
   const filePath = path.join(__dirname, '..', endpoint);
-  fs.readFile(filePath, function(err, file) {
+  fs.readFile(filePath, function (err, file) {
     if (err && err.code === 'ENOENT') {
       response.writeHead(404, {
         'Content-Type': 'text/plain'
@@ -54,10 +58,10 @@ const staticFileHandler = (request, response, endpoint) => {
 
 const signUpUser = (request, response) => {
   let allData = '';
-  request.on('data', function(data) {
+  request.on('data', function (data) {
     allData += data;
   });
-  request.on('end', function() {
+  request.on('end', function () {
     const userInfo = JSON.parse(allData);
     const email = userInfo.email;
     queries.emailInDatabase(email, (err, res) => {
@@ -69,30 +73,28 @@ const signUpUser = (request, response) => {
       } else if (res === 0) {
         const hashPassword = (password, callback) => {
           bcrypt.hash(password, 10, (bcrypt_err, bcrypt_res) => {
-             if (bcrypt_err) callback(bcrypt_err);
-             else callback(null,bcrypt_res);
+            if (bcrypt_err) callback(bcrypt_err);
+            else callback(null, bcrypt_res);
           });
         };
-        hashPassword(userInfo.password,(hash_err,hash_res) => {
-          if(hash_err) {
+        hashPassword(userInfo.password, (hash_err, hash_res) => {
+          if (hash_err) {
             response.writeHead(500, {
               'Content-Type': 'text/plain'
             });
             return response.end('Password Error');
-          }
-          else{
-            queries.addUser(email,hash_res, (add_err, add_res) => {
+          } else {
+            queries.addUser(email, hash_res, (add_err, add_res) => {
               if (add_err) {
                 response.writeHead(500, {
                   'Content-Type': 'text/plain'
                 });
                 return response.end('Database Error');
-              }
-              else {
+              } else {
                 const cookie = sign(email, process.env.SECRET);
                 response.writeHead(201, {
-                  'Location' : '/forum',
-                  'Set-Cookie' : `jwt=${cookie}; HttpOnly`
+                  'Location': '/forum',
+                  'Set-Cookie': `jwt=${cookie}; HttpOnly`
                 });
                 return response.end();
               }
@@ -108,43 +110,50 @@ const signUpUser = (request, response) => {
 
 const loginUser = (request, response) => {
   let data = '';
-  request.on('data', function(chunk) {
+  request.on('data', function (chunk) {
     data += chunk;
   })
-  request.on('end', function() {
+  request.on('end', function () {
     const userInfo = JSON.parse(data);
     const email = userInfo.email;
     const password = userInfo.password;
-    queries.emailInDatabase(email, (err,res) => {
+    queries.emailInDatabase(email, (err, res) => {
       if (res === 0) {
-        response.writeHead(409, {"Content-Type" : "text/plain"})
+        response.writeHead(409, {
+          "Content-Type": "text/plain"
+        })
         return response.end('Email not in database');
-      }
-      else if (res === 1) {
-       queries.getHash(email, (hash_err, hash_res) => {
-            if (hash_err) {
-              response.writeHead(500, {"Content-Type" : "text/plain"})
-             return response.end('server error password not found');
-            }
-            else {
-              bcrypt.compare(password, hash_res.rows[0].password, (bcrypt_err, bcrypt_res) => {
-                if (bcrypt_err) {
-                  console.log(bcrypt_err);
-                  response.writeHead(500, {"Content-Type" : "text/plain"})
-                 return response.end('server error');
+      } else if (res === 1) {
+        queries.getHash(email, (hash_err, hash_res) => {
+          if (hash_err) {
+            response.writeHead(500, {
+              "Content-Type": "text/plain"
+            })
+            return response.end('server error password not found');
+          } else {
+            bcrypt.compare(password, hash_res.rows[0].password, (bcrypt_err, bcrypt_res) => {
+              if (bcrypt_err) {
+                response.writeHead(500, {
+                  "Content-Type": "text/plain"
+                })
+                return response.end('server error');
+              } else {
+                if (bcrypt_res) {
+                  const cookie = sign(email, process.env.SECRET);
+                  response.writeHead(201, {
+                    "Location": '/forum',
+                    'Set-Cookie': `jwt=${cookie}; HttpOnly`
+                  });
+                  return response.end();
+                } else {
+                  response.writeHead(201, {
+                    "Location": '/login'
+                  });
+                  return response.end('Password was incorrect');
                 }
-                else {
-                  if (bcrypt_res) {
-                    const cookie = sign(email, process.env.SECRET);
-                    response.writeHead(201, {"Location" : '/forum', 'Set-Cookie' : `jwt=${cookie}; HttpOnly`});
-                    return response.end();
-                  } else {
-                    response.writeHead(201, {"Location" : '/login'});
-                    return response.end('Password was incorrect');
-                  }
-                }
-              });
-            }
+              }
+            });
+          }
         })
       }
     })
@@ -155,5 +164,6 @@ module.exports = {
   homeHandler,
   staticFileHandler,
   signUpUser,
-  loginUser
+  loginUser,
+  validateToken
 };
