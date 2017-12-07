@@ -65,7 +65,7 @@ const signUpUser = (request, response) => {
         response.writeHead(409, {
           'Content-Type': 'text/plain'
         });
-        return response.end('User already in database');
+        return response.end('You\'ve already signed up!');
       } else if (res === 0) {
         const hashPassword = (password, callback) => {
           bcrypt.hash(password, 10, (bcrypt_err, bcrypt_res) => {
@@ -117,8 +117,8 @@ const loginUser = (request, response) => {
     const password = userInfo.password;
     queries.emailInDatabase(email, (err,res) => {
       if (res === 0) {
-        response.writeHead(409, {"Content-Type" : "text/plain"})
-        return response.end('Email not in database');
+        response.writeHead(403, {"Content-Type" : "text/plain"})
+        return response.end('You need to sign up first!');
       }
       else if (res === 1) {
        queries.getHash(email, (hash_err, hash_res) => {
@@ -129,7 +129,6 @@ const loginUser = (request, response) => {
             else {
               bcrypt.compare(password, hash_res.rows[0].password, (bcrypt_err, bcrypt_res) => {
                 if (bcrypt_err) {
-                  console.log(bcrypt_err);
                   response.writeHead(500, {"Content-Type" : "text/plain"})
                  return response.end('server error');
                 }
@@ -139,7 +138,7 @@ const loginUser = (request, response) => {
                     response.writeHead(201, {"Location" : '/forum', 'Set-Cookie' : `jwt=${cookie}; HttpOnly`});
                     return response.end();
                   } else {
-                    response.writeHead(201, {"Location" : '/login'});
+                    response.writeHead(403, {"Content-Type" : 'text/plain'});
                     return response.end('Password was incorrect');
                   }
                 }

@@ -11,21 +11,19 @@ var errorMsg = document.getElementById('errorMessage');
 var loginErrorMsg = document.getElementById('loginErrorMessage');
 
 // sort out passwords IMPORTANT
-function handleResponse() {
 
-};
 
 login.addEventListener('submit', function (event) {
     event.preventDefault();
     if (errorMsg.textContent === "") {
-        XHRRequest('/login', 'POST', JSON.stringify({email: loginEmail.value, password: loginPassword.value}), handleResponse)
+        XHRRequest('/login', 'POST', JSON.stringify({email: loginEmail.value, password: loginPassword.value}), loginErrorMsg)
     }
 });
 
 signup.addEventListener('submit', function (event) {
     event.preventDefault();
     if (errorMsg.textContent === "" && pw1.className === "") {
-        XHRRequest('/signup', 'POST', JSON.stringify({ email: email.value, password: pw1.value }), handleResponse)
+        XHRRequest('/signup', 'POST', JSON.stringify({ email: email.value, password: pw1.value }), errorMsg)
     }
 });
 
@@ -95,16 +93,13 @@ var resetPasswords = function (event) {
 pw1.addEventListener('focus', resetPasswords);
 pw2.addEventListener('focus', resetPasswords);
 
-var XHRRequest = function (url, method, body, callback) {
+var XHRRequest = function (url, method, body, errMsgBox) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var result = parseResponse(xhr.responseText);
-            callback(result);
-        } else if (xhr.readyState === 4 && xhr.status === 201) {
+        if (xhr.readyState === 4 && xhr.status === 201) {
             window.location.href = xhr.getResponseHeader('Location');
         } else if (xhr.readyState === 4 && xhr.status >= 400) {
-            console.log(xhr.responseText);
+            errMsgBox.textContent = xhr.responseText;
         }
     }
     xhr.open(method, url, true);
