@@ -14,7 +14,6 @@ const emailInDatabase = (email, cb) => {
 
 const addUser = (email,password,cb) => {
 	dbConnection.query('INSERT INTO users(username,password) VALUES($1,$2)',[email,password],(err,res) => {
-		console.log(res.rows);
 		if(err) cb(err)
 		else cb(null,res);
 	})
