@@ -27,9 +27,16 @@ const getHash = (email, cb) => {
 }
 
 const loadPost = (cb) => {
-	dbConnection.query('SELECT post.title, post.text_post, users.username FROM post, users WHERE users.id=post.postuser_id AND post.id=1', (err, res) => {
+	dbConnection.query('SELECT post.id, post.title, post.text_post, users.username FROM post, users WHERE users.id=post.postuser_id', (err, res) => {
 		if (err) cb(err);
 		else cb(null, res);
+	})
+}
+
+const loadComments = (postID, cb) => {
+	dbConnection.query(`SELECT users.username, comments.text_comments FROM users, comments WHERE users.id=comments.commentuser_id AND comments.post_id=${postID}`, (err, res) => {
+		if (err) cb(err);
+		else cb(null, res.rows);
 	})
 }
 
