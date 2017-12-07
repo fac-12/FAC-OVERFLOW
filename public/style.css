@@ -1,7 +1,7 @@
 * {
 	margin: 0;
 	box-sizing: border-box;
-	font-family: 'Oxygen', sans-serif;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
 section {
@@ -10,7 +10,7 @@ section {
     justify-content: center;
     margin: 0 auto;
     width: 20rem;
-    background:white;
+    /* background:white; */
 }
 
 h1 {
@@ -79,7 +79,7 @@ nav li {
 	list-style: none;
 }
 
-.logo {
+/* .logo {
 	color: white;
 	font-size: 2rem;
 	text-transform: uppercase;
@@ -87,5 +87,19 @@ nav li {
 	font-weight: 200;
 	letter-spacing: 3px;
 	margin-left: 10px;
+} */
+
+.logo {
+	color: white;
+	font-size: 1.5rem;
+	text-transform: lowercase;
+	font-weight: lighter;
+	font-weight: lighter;
+	/* letter-spacing: 3px; */
+	margin-left: 100px;
 }
 
+.logo span {
+	font-weight: 400;
+
+}

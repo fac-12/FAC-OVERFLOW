@@ -24,7 +24,7 @@ nav li {
 	font-weight: lighter;
 	font-weight: lighter;
 	/* letter-spacing: 3px; */
-	margin-left: 20px;
+	margin-left: 100px;
 }
 
 .logo span {
@@ -35,9 +35,53 @@ nav li {
 .user {
 	align-self: flex-end;
 	color: white;
-	margin-right: 20px;
+	margin-right: 100px;
 }
 
 p {
 	font-weight: 100;
 }
+/* .post {
+	margin-left: 100px;
+} */
+
+.postTitle {
+	font-size: 1.4rem;
+	margin-bottom: 5px;
+	margin-top: 10px;
+}
+
+main {
+	max-width: 1080px;
+	margin: 0 auto;
+}
+.postBox {
+	border-bottom: 1px solid #ecf0f1;
+}
+
+.postBox:first-child {
+	margin-top: 50px;
+}
+
+.postAuthor,
+.commentAuthor {
+	font-size: 0.9rem;
+	margin-bottom: 25px;
+}
+
+.commentAuthor  {
+	margin-bottom: 10px;
+}
+
+.postText {
+	margin-bottom: 20px;
+}
+
+.commentBtn {
+	margin-bottom: 20px;
+}
+
+.commentBox {
+	border-bottom: 1px solid #ecf0f1;
+}
+
