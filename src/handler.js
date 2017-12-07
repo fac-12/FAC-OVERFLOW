@@ -64,10 +64,12 @@ const validateToken = (request, response) => {
     });
     return response.end(message);
   }
-  const {
-    jwt
-  } = parse(request.headers.cookie);
-  if (!request.headers.cookie && !jwt) return send401();
+  if (request.headers.cookie) {
+    const {
+      jwt
+    } = parse(request.headers.cookie);
+  }
+  if (!request.headers.cookie || !jwt) return send401();
   return verify(jwt, process.env.SECRET, (jwt_err, jwt_res) => {
     if (jwt_err) {
       return send401()

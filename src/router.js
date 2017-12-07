@@ -11,8 +11,9 @@ const router = (request, response) => {
   } else if (endpoint === '/login') {
     handlers.loginUser(request, response);
   } else if (endpoint === '/forum') {
-    handlers.validateToken(request, response);
     handlers.staticFileHandler(request, response, '/public/Forum.html');
+  } else if (endpoint === '/validate') {
+    handlers.validateToken(request, response);
   } else {
     response.writeHead(404, {'Content-Type': 'text/plain'});
     response.end('404 resource not found');
