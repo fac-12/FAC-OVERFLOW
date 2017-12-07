@@ -26,9 +26,9 @@ login.addEventListener('submit', function (event) {
 signup.addEventListener('submit', function (event) {
     event.preventDefault();
     if (email.value === "") {
-        loginErrorMsg.textContent = "Please enter an email."
+        errorMsg.textContent = "Please enter an email."
     } else {
-        loginErrorMsg.textContent = badPassword(loginPassword.value);
+        errorMsg.textContent = badPassword(loginPassword.value);
     }
     if (errorMsg.textContent === "" && pw1.className === "") {
         XHRRequest('/signup', 'POST', JSON.stringify({ email: email.value, password: pw1.value }), errorMsg)
