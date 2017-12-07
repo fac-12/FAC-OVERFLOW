@@ -191,7 +191,7 @@ const getPost =  (request, response) => {
       return response.end('Database error')
     } else {
       response.writeHead(200,{ 'Content-Type': 'application/json'})
-      response.end(JSON.stringify(post_res.rows[0]))
+      response.end(JSON.stringify(post_res))
     }
   })
 }

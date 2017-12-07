@@ -27,9 +27,9 @@ const getHash = (email, cb) => {
 }
 
 const loadPost = (cb) => {
-	dbConnection.query('SELECT post.title, post.text_post, users.username FROM post, users WHERE users.id=post.postuser_id AND post.id=1', (err, res) => {
+	dbConnection.query('SELECT post.title, post.text_post, users.username FROM post, users WHERE users.id=post.postuser_id', (err, res) => {
 		if (err) cb(err);
-		else cb(null, res);
+		else cb(null, res.rows);
 	})
 }
 
