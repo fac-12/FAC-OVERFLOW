@@ -65,9 +65,7 @@ const validateToken = (request, response) => {
     return response.end(message);
   }
   if (!request.headers.cookie) return send401();
-  const {
-    jwt
-  } = parse(request.headers.cookie);
+  const { jwt } = parse(request.headers.cookie);
   if (!jwt) return send401();
   return verify(jwt, process.env.SECRET, (jwt_err, jwt_res) => {
     if (jwt_err) {
