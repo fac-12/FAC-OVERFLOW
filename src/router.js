@@ -11,7 +11,7 @@ const router = (request, response) => {
   } else if (endpoint === '/login') {
     handlers.loginUser(request, response);
   } else if (endpoint === '/forum') {
-    handlers.staticFileHandler(request, response, '/public/Forum.html');
+    handlers.staticFileHandler(request, response, '/public/forum.html');
   } else if (endpoint === '/validate') {
     handlers.validateToken(request, response);
   } else {

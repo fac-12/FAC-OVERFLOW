@@ -64,18 +64,14 @@ const validateToken = (request, response) => {
     });
     return response.end(message);
   }
-  if (request.headers.cookie) {
-    const {
-      jwt
-    } = parse(request.headers.cookie);
-  }
-  if (!request.headers.cookie || !jwt) return send401();
+  if (!request.headers.cookie) return send401();
+  const { jwt } = parse(request.headers.cookie);
+  if(!jwt) return send401();
   return verify(jwt, process.env.SECRET, (jwt_err, jwt_res) => {
     if (jwt_err) {
       return send401()
     } else {
        const email = jwt_res;
-       console.log('I\'m email: ',typeof email)
        response.writeHead(200, { 'Content-Type': 'text/plain'});
        return response.end(email);
     }
