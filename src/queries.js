@@ -40,4 +40,11 @@ const loadComments = (postID, cb) => {
 	})
 }
 
-module.exports = {emailInDatabase,addUser, getHash, loadPost, loadComments};
+const addComment = (username, postID, comment, cb) => {
+	dbConnection.query(`INSERT INTO comments(post_id, commentuser_id, text_comments) VALUES ($1, (SELECT id FROM users WHERE username = $2), $3)`, [postID, username, comment], (err,res) => {
+		if (err) cb (err);
+		else cb(null, res);
+	})
+}
+
+module.exports = {emailInDatabase,addUser, getHash, loadPost, loadComments, addComment};

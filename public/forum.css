@@ -116,3 +116,10 @@ main {
 	text-transform:  lowercase;
 	margin-left: 20px;
 }
+
+.newCommentInput {
+	width: 15rem;
+	margin-left: 20px;
+	margin-right: 5px;
+	height: 3rem;
+}
