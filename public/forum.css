@@ -1,5 +1,4 @@
 * {
-	/* font-family: 'Oxygen', sans-serif; */
 	font-family: 'Source Sans Pro', sans-serif;
     margin: 0;
 	box-sizing: border-box;
@@ -10,7 +9,6 @@
     background-color: #20c3bc;
     display: flex;
 	align-items: center;
-	justify-content: space-between;
 }
 
 nav li {
@@ -22,9 +20,6 @@ nav li {
 	font-size: 1.5rem;
 	text-transform: lowercase;
 	font-weight: lighter;
-	font-weight: lighter;
-	/* letter-spacing: 3px; */
-	margin-left: 100px;
 }
 
 .logo span {
@@ -35,7 +30,6 @@ nav li {
 .user {
 	align-self: flex-end;
 	color: white;
-	margin-right: 100px;
 }
 
 p {
@@ -48,8 +42,16 @@ p {
 	margin-top: 10px;
 }
 
+.navtext {
+	width: 70%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
 main {
-	max-width: 1080px;
+	max-width: 70%;
 	margin: 0 auto;
 }
 .postBox {
@@ -67,21 +69,50 @@ main {
 }
 
 .commentAuthor  {
-	margin-bottom: 10px;
+	display: inline-block;
+	color: #20c3bc;
+	font-weight: normal;
+	margin: 15px 0;
 }
 
+.commentText {
+	display: inline-block;
+	margin-right: 5px;
+
+}
 .postText {
 	margin-bottom: 20px;
 }
 
 .commentBtn {
-	margin-bottom: 20px;
+	margin-bottom: 25px;
+	border: none;
+	background: #43CFCA;
+	font-size: 0.9rem;
+	font-weight: lighter;
+	text-transform:  lowercase;
+	padding: 10px 20px;
+	color: white;
+	border-radius: 3px;
 }
 
 .commentBox {
 	border-bottom: 1px solid #ecf0f1;
+	margin-left: 20px;
 }
 
 .hidden {
 	display:none;
+}
+
+.user-container {
+	display: flex;
+}
+
+.logoutBtn {
+	font-size: 1rem;
+	color: white;
+	font-weight: lighter;
+	text-transform:  lowercase;
+	margin-left: 20px;
 }

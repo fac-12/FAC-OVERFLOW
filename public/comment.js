@@ -82,6 +82,7 @@ function displayComments(button, comments, post) {
         var commentText = document.createElement('p');
         var commentTextText = document.createTextNode(comment.text_comments);
         commentText.appendChild(commentTextText);
+        commentText.setAttribute('class','commentText');
         var commentAuthor = document.createElement('p');
         var commentAuthorText = document.createTextNode(comment.username);
         commentAuthor.appendChild(commentAuthorText);
