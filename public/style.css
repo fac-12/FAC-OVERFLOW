@@ -18,22 +18,15 @@ section {
 }
 
 h1 {
-	/* font-weight: normal; */
 	color: white;
 	text-transform: lowercase;
-	margin-bottom: 20px;
+	background-position-x:	margin-bottom: 20px;
 }
-/* /* h1 {
-	/* display: inline; */
-	/* text-align: center; */
-    /* margin: 1rem 0 1rem 0; */
-	/* background: white; */
 
 
 form {
 	display: flex;
 	flex-direction: column;
-	/* margin: 0 auto; */
 }
 
 form > label {
@@ -48,7 +41,6 @@ input {
 	font-size: 1rem;
 	background-color: rgba(255, 255, 255, 0.4);
 	border: 0;
-	/* border: 1px solid rgba(255, 255, 255, 0.5); */
 	border-radius: 3px;
 	padding: 8px;
 	margin: 5px 0;
@@ -68,8 +60,7 @@ p {
 
 .navbar {
 	height: 100px;
-    /* background-color: rgba(32, 195, 188, 0.4); */
-    display: flex;
+  display: flex;
 	align-items: center;
 	justify-content: flex-start;
 	margin-bottom: 20px;
@@ -103,9 +94,4 @@ button {
 	color: white;
 	border-radius: 3px;
 	width: 15rem;
-}
-
-.forms {
-	/* background: rgba(255, 255, 255, 0.6); */
-
 }
