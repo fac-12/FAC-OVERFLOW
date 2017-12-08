@@ -15,19 +15,19 @@
                 </section>
             </nav>
     <section class="forms">
-        <h1>Log in</h1>
         <form id="login">
+            <h1>Log in</h1>
             <label for="login_email">
                 <input id="login_email" placeholder="email"/>
             </label>
             <label for="login_password">
                 <input type="password" id="login_password" placeholder="password" />
             </label>
-            <p id="loginErrorMessage"></p>
+            <p id="loginErrorMessage" class="loginErrorMessage"></p>
             <button type="submit">Login</button>
         </form>
-        
         <form id="signup">
+            <h1>Sign Up</h1>
             <label for="email">
                 <input id="email" placeholder="email" />
             </label>
@@ -37,7 +37,7 @@
             <label for="confirmPassword">
                 <input type="password" id="confirmPassword" placeholder="confirm password"/>
             </label>
-            <p id="errorMessage"></p>
+            <p id="errorMessage" class="loginErrorMessage"></p>
             <button type="submit">Sign Up</button>
         </form>
         </section>
