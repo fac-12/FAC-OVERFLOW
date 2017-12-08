@@ -203,8 +203,7 @@ const getComments =  (request, response, endpoint) => {
       response.writeHead(500, {'Content-Type': 'text/plain'})
       return response.end('Database error')
     } else {
-      response.writeHead(200,{ 'Content-Type': 'application/json'})
-      console.log(comments_res);
+      response.writeHead(200,{ 'Content-Type': 'application/json'});
       response.end(JSON.stringify(comments_res))
     }
   })
@@ -218,6 +217,29 @@ const logoutHandler =  (request, response) => {
   return response.end();
 }
 
+const addComment = (request, response) => {
+  let data = '';
+  request.on('data', function (chunk) {
+    data += chunk;
+  });
+  request.on('end', function () {
+    const commentInfo = JSON.parse(data);
+    queries.addComment(commentInfo.username, commentInfo.post, commentInfo.comment, (err, res) => {
+      if (err) {
+        response.writeHead(500, {
+          'Content-Type': 'text/plain'
+        });
+        return response.end('Database Error');
+      } else {
+        response.writeHead(200, {
+          'Content-Type': 'text/plain'
+        });
+        return response.end('Success');
+      }
+    })
+  });
+}
+
 
 module.exports = {
   homeHandler,
@@ -227,5 +249,6 @@ module.exports = {
   validateToken,
   getPost,
   getComments,
-  logoutHandler
+  logoutHandler,
+  addComment
 };

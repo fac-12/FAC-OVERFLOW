@@ -6,11 +6,15 @@ const buildDatabase = (cb) => {
 
   connection.query(sql, (err, result) => {
     if (err) {
+      console.log('The database failed and wasn\'t build');
       cb(err);
     } else {
+      console.log('The database is build successfully');
       cb(null, result);
     }
   });
+
 };
+
 
 module.exports = buildDatabase;
