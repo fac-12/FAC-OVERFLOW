@@ -84,6 +84,7 @@ function displayComments(button, comments, post) {
     newComment.setAttribute('class','newComment');
     var commentInput = document.createElement('textarea');
     commentInput.setAttribute('class','newCommentInput');
+    commentInput.setAttribute('placeholder','add comment');
     var commentSubmit = document.createElement('button');
     commentSubmit.setAttribute('class','submitCommentBtn');
     var commentSubmitText = document.createTextNode('Submit');
