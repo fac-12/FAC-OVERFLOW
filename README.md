@@ -11,7 +11,7 @@ Users can log out.
 If user tries to go to the forum page without authentication then they are redirected to the log in page.
 
 
-### Task 1: Setting up the database
+  # Setting up the database locally
 
 We are currently hard-coding the data in to the application (`static.js`) because we don't have a database. Now we want to replace `static.js` with an actual database. Let's start by setting up the database we will connect to.
 
