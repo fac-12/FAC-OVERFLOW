@@ -1,7 +1,12 @@
 * {
 	margin: 0;
 	box-sizing: border-box;
-	font-family: 'Oxygen', sans-serif;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: lighter;
+}
+
+body {
+	background-image: linear-gradient(rgba(0,130,170,.5),rgba(0,130,170,.5)), url('login-background.png');
 }
 
 section {
@@ -9,74 +14,56 @@ section {
 	flex-direction: column;
     justify-content: center;
     margin: 0 auto;
-    width: 25rem;
-		background:white;
+    width: 70%;
 }
 
 h1 {
-	display: inline;
-	text-align: center;
-    margin: 1rem 0 1rem 0;
-    background: white;
+	color: white;
+	text-transform: lowercase;
+	background-position-x:	margin-bottom: 20px;
 }
+
 
 form {
 	display: flex;
 	flex-direction: column;
-	margin: 2rem auto 0 auto;
-	background-color: white;
-	padding: 10px;
-	width: 20rem;
-	justify-content: center;
-	align-items: center;
-	border: 3px solid rgb(215, 215, 215);
 }
 
 form > label {
-	margin: 5px 0;
 	display: flex;
 	flex-direction: column;
 	font-size: 1rem;
 	color: rgb(67, 66, 66);
-	background-color: white;
 }
 
 input {
 	width: 15rem;
 	font-size: 1rem;
+	background-color: rgba(255, 255, 255, 0.4);
 	border: 0;
-	background-color: rgb(227, 227, 227);
-	border: 1px solid rgb(227, 227, 227);
-	padding: 5px;
-	margin: 3px 0;
-}
-
-button {
-	height: 1.5rem;
-	margin: 10px 0;
-	width: 5rem;
-	align-self: center;
+	border-radius: 3px;
+	padding: 8px;
+	margin: 5px 0;
+	color: white;
 }
 
 p {
-	background-color: white;
-	text-align: center;
-	color: red;
+	color: #FF892A;
 	margin: 5px 0;
 	height: 1rem;
 }
 
 .red {
-	border: 1px solid red;
-	outline-color: red;
+	border: 1px solid #FF892A;
+	outline-color: #FF892A;
 }
-
-/* forum */
 
 .navbar {
 	height: 100px;
-	background-color: #20c3bc;
-	padding: 25px;
+  display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	margin-bottom: 20px;
 }
 
 nav li {
@@ -85,10 +72,26 @@ nav li {
 
 .logo {
 	color: white;
-	font-size: 2rem;
-	text-transform: uppercase;
-	font-family: 'Oxygen', sans-serif;
-	font-weight: 200;
-	letter-spacing: 3px;
-	margin-left: 10px;
+	font-size: 1.5rem;
+	text-transform: lowercase;
+	font-weight: lighter;
+	max-width: 70%;
+}
+
+.logo span {
+	font-weight: 400;
+
+}
+
+button {
+	margin-bottom: 25px;
+	border: none;
+	background: #43CFCA;
+	font-size: 0.9rem;
+	font-weight: lighter;
+	text-transform:  lowercase;
+	padding: 10px 15px;
+	color: white;
+	border-radius: 3px;
+	width: 15rem;
 }

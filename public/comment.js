@@ -31,6 +31,7 @@ var updatePosts = function(posts) {
         postHolder.setAttribute('class','postBox');
         postHolder.setAttribute('id', ('post-'+element.id));
         var postTitle = document.createElement('h1');
+        postTitle.setAttribute('class','postTitle');
         var postTitleText = document.createTextNode(element.title);
         postTitle.appendChild(postTitleText);
         postHolder.appendChild(postTitle);
@@ -38,9 +39,11 @@ var updatePosts = function(posts) {
         var postAuthorText = document.createTextNode(element.username);
         postAuthor.appendChild(postAuthorText);
         postHolder.appendChild(postAuthor);
+        postAuthor.setAttribute('class','postAuthor');
         var postText = document.createElement('p');
         var postTextText = document.createTextNode(element.text_post);
         postText.appendChild(postTextText);
+        postText.setAttribute('class','postText');
         postHolder.appendChild(postText);
         var commentsBtn = document.createElement('button');
         var commentsBtnText = document.createTextNode('Show Comments');
@@ -53,6 +56,7 @@ var updatePosts = function(posts) {
                 this.parentElement.removeChild(this.parentElement.lastChild);
             }
         });
+        commentsBtn.setAttribute('class','commentBtn');
         postHolder.appendChild(commentsBtn);
         postDisplay.appendChild(postHolder);
     });
@@ -74,14 +78,18 @@ function displayComments(button, comments, post) {
     var commentsHolder = document.createElement('div');
     comments.forEach(function(comment) {
         var commentBox = document.createElement('div');
+        commentBox.setAttribute('class','commentBox');
         var commentText = document.createElement('p');
         var commentTextText = document.createTextNode(comment.text_comments);
         commentText.appendChild(commentTextText);
+        commentText.setAttribute('class','commentText');
         var commentAuthor = document.createElement('p');
         var commentAuthorText = document.createTextNode(comment.username);
         commentAuthor.appendChild(commentAuthorText);
+        commentAuthor.setAttribute('class','commentAuthor');
         commentBox.appendChild(commentText);
         commentBox.appendChild(commentAuthor);
+
         commentsHolder.appendChild(commentBox);
     });
     post.appendChild(commentsHolder);

@@ -3,38 +3,42 @@
 
 <head>
     <meta charset="utf-8">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./public/style.css" />
     <title>Sign Up</title>
 </head>
 
 <body>
-    <section>
+    <nav class="navbar">
+                <section class="logo-container">
+                    <p class="logo">FAC<span> Overflow</span></li>
+                </section>
+            </nav>
+    <section class="forms">
+        <h1>Log in</h1>
         <form id="login">
-            <h1>Login</h1>
-            <label for="login_email">Email
-                <input id="login_email" />
+            <label for="login_email">
+                <input id="login_email" placeholder="email"/>
             </label>
-            <label for="login_password">Password
-                <input type="password" id="login_password" />
+            <label for="login_password">
+                <input type="password" id="login_password" placeholder="password" />
             </label>
             <p id="loginErrorMessage"></p>
-            <button type="submit">Submit</button>
+            <button type="submit">Login</button>
         </form>
         
         <form id="signup">
-            <h1>Sign up</h1>
-            <label for="email">Email
-                <input id="email" />
+            <label for="email">
+                <input id="email" placeholder="email" />
             </label>
-            <label for="password">Password
-                <input type="password" id="password" />
+            <label for="password">
+                <input type="password" id="password" placeholder="password"/>
             </label>
-            <label for="confirmPassword">Confirm password
-                <input type="password" id="confirmPassword" />
+            <label for="confirmPassword">
+                <input type="password" id="confirmPassword" placeholder="confirm password"/>
             </label>
             <p id="errorMessage"></p>
-            <button type="submit">Submit</button>
+            <button type="submit">Sign Up</button>
         </form>
         </section>
 
