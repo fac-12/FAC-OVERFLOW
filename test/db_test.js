@@ -59,5 +59,45 @@ test('getHash', (t) => {
 				});
 			}
 		});
+	});
+});
+
+test('loadPost', (t) => {
+	dbBuild((err,res) => {
+		const expected = [
+    {id:1,title: 'HTML',text_post: 'I like HTML',username:'shannon@gmail.com'},
+    {id:2,title: 'CSS',text_post: 'I like CSS',username:'jem@gmail.com'},
+    {id:3,title: 'JS',text_post: 'I like JS',username:'mo@gmail.com'},
+    {id:4,title: 'Authentication',text_post: 'I like cookies',username:'dragomir@gmail.com'}
+];
+		queries.loadPost((err1, res1) => {
+			if(err1) {
+				console.log('err', err1);
+			} else {
+          t.deepEquals(expected, res1, "Should return four posts");
+					t.end();
+
+			}
+		});
+	})
+})
+
+test('loadComments', (t) => {
+	dbBuild((err,res) => {
+		const expected = [
+      {username:'shannon@gmail.com', text_comments:'I love HTML! Hello World!'},
+      {username:'jem@gmail.com', text_comments:'Hmmm I find HTML difficult :('},
+      {username:'shannon@gmail.com', text_comments:'It gets easier with practice!'},
+      {username:'jem@gmail.com',text_comments:'Thanks! Will get there...'}
+];
+		queries.loadComments(1,(err1, res1) => {
+			if(err1) {
+				console.log('err', err1);
+			} else {
+          t.deepEquals(expected, res1, "Should return four comments");
+					t.end();
+
+			}
+		});
 	})
 })
