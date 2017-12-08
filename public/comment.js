@@ -74,8 +74,34 @@ function loadComments(button, id, post) {
 }
 
 function displayComments(button, comments, post) {
-    button.textContent = 'Hide Comments';
+    if (button.textContent === 'Hide Comments') {
+        button.parentElement.removeChild(button.parentElement.lastChild)
+    } else {
+        button.textContent = 'Hide Comments';
+    }
     var commentsHolder = document.createElement('div');
+    var newComment = document.createElement('div');
+    newComment.setAttribute('class','newComment');
+    var commentInput = document.createElement('textarea');
+    commentInput.setAttribute('class','newCommentInput');
+    var commentSubmit = document.createElement('button');
+    commentSubmit.setAttribute('class','submitCommentBtn');
+    var commentSubmitText = document.createTextNode('Submit');
+    commentSubmit.appendChild(commentSubmitText);
+    commentSubmit.addEventListener('click', function() {
+        var theComment = {username: userDisplay.textContent, post: post.id.split("-")[1], comment: commentInput.value};
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200){
+                loadComments(button, post.id.split("-")[1], post);
+            }
+        }
+        xhr.open('POST', '/addComment', true);
+        xhr.send(JSON.stringify(theComment));
+    });
+    newComment.appendChild(commentInput);
+    newComment.appendChild(commentSubmit);
+    commentsHolder.appendChild(newComment);
     comments.forEach(function(comment) {
         var commentBox = document.createElement('div');
         commentBox.setAttribute('class','commentBox');
@@ -89,7 +115,6 @@ function displayComments(button, comments, post) {
         commentAuthor.setAttribute('class','commentAuthor');
         commentBox.appendChild(commentText);
         commentBox.appendChild(commentAuthor);
-
         commentsHolder.appendChild(commentBox);
     });
     post.appendChild(commentsHolder);

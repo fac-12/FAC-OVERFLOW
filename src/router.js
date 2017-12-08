@@ -20,7 +20,9 @@ const router = (request, response) => {
     handlers.getComments(request, response, endpoint);
   } else if (endpoint.indexOf('/logout') !== -1) {
     handlers.logoutHandler(request, response);
-  }else {
+  } else if (endpoint === '/addComment') {
+    handlers.addComment(request, response);
+  } else {
     response.writeHead(404, {'Content-Type': 'text/plain'});
     response.end('404 resource not found');
   }
