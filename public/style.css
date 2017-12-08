@@ -9,8 +9,8 @@ section {
 	flex-direction: column;
     justify-content: center;
     margin: 0 auto;
-    width: 20rem;
-    background:white;
+    width: 25rem;
+		background:white;
 }
 
 h1 {
@@ -23,9 +23,13 @@ h1 {
 form {
 	display: flex;
 	flex-direction: column;
-	margin: 0 auto;
+	margin: 2rem auto 0 auto;
 	background-color: white;
 	padding: 10px;
+	width: 20rem;
+	justify-content: center;
+	align-items: center;
+	border: 3px solid rgb(215, 215, 215);
 }
 
 form > label {
@@ -88,4 +92,3 @@ nav li {
 	letter-spacing: 3px;
 	margin-left: 10px;
 }
-
