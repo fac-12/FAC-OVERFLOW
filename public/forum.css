@@ -6,7 +6,7 @@
 
 .navbar {
 	height: 100px;
-    background-color: #20c3bc;
+    background-color: rgba(0,130,170,.9);
     display: flex;
 	align-items: center;
 }
@@ -70,7 +70,7 @@ main {
 
 .commentAuthor  {
 	display: inline-block;
-	color: #20c3bc;
+	color: rgba(0,130,170,.9);
 	font-weight: normal;
 	margin: 15px 0;
 }
@@ -84,10 +84,10 @@ main {
 	margin-bottom: 20px;
 }
 
-.commentBtn {
+.submitCommentBtn, .commentBtn {
 	margin-bottom: 25px;
 	border: none;
-	background: #43CFCA;
+	background: #FFB400;
 	font-size: 0.9rem;
 	font-weight: lighter;
 	text-transform:  lowercase;
@@ -95,6 +95,17 @@ main {
 	color: white;
 	border-radius: 3px;
 	cursor: pointer;
+}
+
+.newComment {
+	display: flex;
+	align-items: flex-end;
+}
+
+.submitCommentBtn {
+	margin-bottom: 0;
+	margin-left: 5px;
+	height: 45px;
 }
 
 .commentBox {
@@ -120,8 +131,14 @@ main {
 }
 
 .newCommentInput {
-	width: 15rem;
+	width: 80%;
  	margin-left: 20px;
  	margin-right: 5px;
- 	height: 3rem;
+	border: 1px solid #ecf0f1;
+	height: 45px;
+	resize: none;
+	font-size: 1rem;
+	font-weight: lighter;
+	outline: none;
+	padding: 10px 10px;
 }
