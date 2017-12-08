@@ -118,3 +118,10 @@ main {
 	margin-left: 20px;
 	cursor: pointer;
 }
+
+.newCommentInput {
+	width: 15rem;
+ 	margin-left: 20px;
+ 	margin-right: 5px;
+ 	height: 3rem;
+}
