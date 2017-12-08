@@ -94,6 +94,7 @@ main {
 	padding: 10px 20px;
 	color: white;
 	border-radius: 3px;
+	cursor: pointer;
 }
 
 .commentBox {
@@ -115,4 +116,5 @@ main {
 	font-weight: lighter;
 	text-transform:  lowercase;
 	margin-left: 20px;
+	cursor: pointer;
 }

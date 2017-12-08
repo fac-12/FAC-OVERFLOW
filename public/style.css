@@ -101,6 +101,7 @@ button {
 	border-radius: 3px;
 	width: 15rem;
 	margin-top: 10px;
+	cursor: pointer;
 }
 
 form:first-child {
